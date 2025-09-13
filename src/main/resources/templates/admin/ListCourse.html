@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f7f9fc; color: #222; }
+        h1 { color: #1f618d; margin-bottom: 16px; }
+        form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+        form input, form select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; min-width: 160px; }
+        form button { background: #2d9cdb; color: #fff; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        th, td { padding: 10px; border: 1px solid #e6eef6; text-align: left; }
+        th { background: #eaf3fb; }
+        .actions a { margin-right: 8px; color: #2d9cdb; text-decoration: none; }
+        .actions a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Danh sach khoa hoc</h1>
+    <form th:action="@{/admin/add-course}" method="post" th:object="${newCourse}">
+        <input type="text" th:field="*{titleCourse}" placeholder="Ten khoa hoc"/>
+        <input type="text" th:field="*{soTinHocPhan}" placeholder="So tin hoc phan"/>
+        <input type="text" th:field="*{soTinHocPhi}" placeholder="So tin hoc phi"/>
+        <input type="text" th:field="*{maxStudent}" placeholder="So sinh vien toi da"/>
+        <input type="text" th:field="*{totalCost}" placeholder="Hoc phi"/>
+        <button type="submit">Them khoa hoc</button>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title Course</th>
+                <th>So tin chi hoc phan</th>
+                <th>So tin chi hoc phi</th>
+                <th>So luong sinh vien</th>
+                <th>Hoc phi</th>
+                <th>Hanh dong</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="course : ${listCourse}">
+                <td th:text="${course.courseID}"></td>
+                <td th:text="${course.titleCourse}"></td>
+                <td th:text="${course.soTinHocPhan}"></td>
+                <td th:text="${course.soTinHocPhi}"></td>
+                <td th:text="${course.studentRegistered + ' / ' + course.maxStudent}"></td>
+                <td th:text="${course.totalCost}"></td>
+                <td class="actions">
+                    <a th:href="@{'/admin/edit-course/' + ${course.courseID}}">Edit</a>
+                    <a th:href="@{'/admin/delete-course/' + ${course.courseID}}"
+                       onclick="return confirm('Are you sure you want to delete this course?');"
+                       >Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
