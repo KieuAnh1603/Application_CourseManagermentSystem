@@ -22,4 +22,5 @@ public class User {
     public void AddCourse(Course course) {
         this.courseRegistered.add(course);
     }
+    
 }

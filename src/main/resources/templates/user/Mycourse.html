@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f7f9fc; color: #222; }
+        h1 { color: #1f618d; margin-bottom: 12px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { padding: 10px; border: 1px solid #e6eef6; text-align: left; }
+        th { background: #eaf3fb; }
+        .actions a { color: #2d9cdb; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Danh sach cac khoa hoc</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title Course</th>
+                <th>So tin chi hoc phan</th>
+                <th>So tin chi hoc phi</th>
+                <th>So luong sinh vien</th>
+                <th>Hoc phi</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="course : ${MyCourses}">
+                <td th:text="${course.courseID}"></td>
+                <td th:text="${course.titleCourse}"></td>
+                <td th:text="${course.soTinHocPhan}"></td>
+                <td th:text="${course.soTinHocPhi}"></td>
+                <!-- fix: dùng 1 expression để nối chuỗi -->
+                <td th:text="${course.studentRegistered + ' / ' + course.maxStudent}"></td>
+                <!-- fix: tên trường đúng là totalCost -->
+                <td th:text="${course.totalCost}"></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

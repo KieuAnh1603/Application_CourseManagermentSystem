@@ -12,10 +12,9 @@
     </style>
 </head>
 <body>
-    <h1>Day la user home</h1>
-    <!-- the a xem cac khoa hoc -->
-    <a th:href="@{/user/all-course}">Xem cac khoa hoc</a>
-    <!-- the a xem khoa hoc da dang ky -->
-    <a th:href="@{/user/my-courses/{id}(id=${user != null ? user.userID : 1})}">Xem khoa hoc da dang ky</a>
+    <h1>Day la trang Home</h1>
+
+    <a th:href="@{/showregister}">Sang trang đăng kí</a>
+    <a th:href="@{/showlogin}">Sang trang đăng nhập</a>
 </body>
 </html>

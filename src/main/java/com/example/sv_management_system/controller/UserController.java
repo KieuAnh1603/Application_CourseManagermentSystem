@@ -22,17 +22,22 @@ public class UserController {
     // Create, Update, Read, Delete
 
     List<User> users = new ArrayList<>();
+    
 
     public UserController() {
         users = DataBase.GetAllUser();
     }
 
+
+    
     @GetMapping("/admin/all-user")
     public String ShowAllUser(Model model) {
         model.addAttribute("newUser", new User());
         model.addAttribute("listUser", users);
         return "admin/ListUser";
     }
+
+
 
     @DeleteMapping("/admin/delete-user/{userID}")
     public String DeleteUser(@PathVariable("userID") int userID) {
@@ -46,6 +51,8 @@ public class UserController {
         return null;
     }
 
+
+
     @GetMapping("/admin/edit-user/{userID}")
     public String ShowFormEditUser(@PathVariable("userID") int user_id, Model model) {
         User user = users.stream()
@@ -57,24 +64,32 @@ public class UserController {
         return "admin/FormEditUser";
     }
 
-    @PutMapping("/admin/update-user")
+
+
+    @PostMapping("/admin/update-user")
     public String UpdateUser(@ModelAttribute("userInfoEdit") User user) {
         for (User u : users) {
             if (u.getUserID() == user.getUserID()) {
                 u.setEmail(user.getEmail());
                 u.setPassword(user.getPassword());
                 u.setRole(user.getRole());
+                DataBase.UpdateUserList(users);
                 return "redirect:/admin/all-user";
             }
         }
         return null;
     }
 
+
+
     @PostMapping("/admin/add-user")
     public String SaveUpdateUser(@ModelAttribute("newUser") User user) {
         users.add(user);
+        DataBase.UpdateUserList(users);
         return "redirect:/admin/all-user";
     }
+
+
 
     @GetMapping("/user/add-course/{userID}/{courseID}")
     public String UserAddCourse(@PathVariable("userID") int userID,
@@ -92,4 +107,5 @@ public class UserController {
         }
         return "redirect:/user/home";
     }
+
 }

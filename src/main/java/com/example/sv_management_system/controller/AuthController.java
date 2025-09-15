@@ -43,19 +43,30 @@ public class AuthController {
         return null;
     }
 
-    @PostMapping("/register")
-    public String Register() {
-        return null;
-    }
-
-    @GetMapping("/")
+    @GetMapping("/showlogin")
     public String ShowLogin(Model model) {
         model.addAttribute("userInfoLogin", new User());
         return "auth/Login";
     }
+
+    @GetMapping("/")
+    public String ShowHome(){
+        return "auth/homeauth";
+    }
+
+    @GetMapping("/showregister")
     public String ShowRegister(Model model) {
-        model.addAttribute("newUser", new User());
+        model.addAttribute("newInfoRegister", new User());
         return "auth/Register";
+    }
+
+    @PostMapping("/dangki")
+    public String addRegister(@ModelAttribute("newInfoRegister") User user){
+        user.setRole("USER");
+        users.add(user);
+        DataBase.UpdateUserList(users);
+
+        return "redirect:/";
     }
 
     @GetMapping("/{role}/home")
