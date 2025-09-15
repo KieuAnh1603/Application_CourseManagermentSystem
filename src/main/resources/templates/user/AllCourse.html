@@ -33,13 +33,12 @@
                 <td th:text="${course.titleCourse}"></td>
                 <td th:text="${course.soTinHocPhan}"></td>
                 <td th:text="${course.soTinHocPhi}"></td>
-                <!-- fix: dùng 1 expression để nối chuỗi -->
                 <td th:text="${course.studentRegistered + ' / ' + course.maxStudent}"></td>
-                <!-- fix: tên trường đúng là totalCost -->
                 <td th:text="${course.totalCost}"></td>
                 <td class="actions">
-                    <!-- build URL bằng cú pháp parameterized để tránh lỗi khi 'user' không tồn tại -->
-                    <a th:href="@{/user/register-course/{userID}/{courseID}(userID=${user != null ? user.userID : 1},courseID=${course.courseID})}">Dang ki hoc</a>
+                    <a th:href="@{/user/register-course/{userID}/{courseID}(userID=${session.user != null ? session.user.userID : 1},courseID=${course.courseID})}">
+                        Dang ki hoc
+                    </a>
                 </td>
             </tr>
         </tbody>

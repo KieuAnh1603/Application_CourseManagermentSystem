@@ -3,8 +3,6 @@ package com.example.sv_management_system.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
 import com.example.sv_management_system.data.DataBase;
 import com.example.sv_management_system.model.Course;
 import org.springframework.web.bind.annotation.*;

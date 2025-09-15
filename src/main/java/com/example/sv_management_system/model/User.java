@@ -17,10 +17,15 @@ public class User {
     private String role; // "ADMIN" or "USER"
     private List<Course> courseRegistered = new ArrayList<>();
 
+    private static int userCount = 2;
+
     // static, enum
 
     public void AddCourse(Course course) {
         this.courseRegistered.add(course);
     }
-    
+
+    public void setUserID() {
+        this.userID = ++userCount;
+    }
 }

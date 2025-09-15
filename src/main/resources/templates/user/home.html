@@ -13,9 +13,14 @@
 </head>
 <body>
     <h1>Day la user home</h1>
-    <!-- the a xem cac khoa hoc -->
+
+    <!-- kiem tra thong tin user da duoc luu trong session chua -->
+    <div th:if="${session.user != null}">
+        Dang nhap: <span th:text="${session.user.email}"></span>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+
     <a th:href="@{/user/all-course}">Xem cac khoa hoc</a>
-    <!-- the a xem khoa hoc da dang ky -->
-    <a th:href="@{/user/my-courses/{id}(id=${user != null ? user.userID : 1})}">Xem khoa hoc da dang ky</a>
+    <a th:href="@{/user/my-courses/{id}(id=${session.user != null ? session.user.userID : 1})}">Xem khoa hoc da dang ky</a>
 </body>
 </html>
